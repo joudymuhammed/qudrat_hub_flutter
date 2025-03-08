@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
-
-
+import 'package:qudrat_hub/Screens/Employee/ApplicationDetails.dart';
+import 'package:qudrat_hub/Screens/Employee/MyApplicationsPage.dart';
 class ApplicationsPage extends StatelessWidget {
   final List<Map<String, String>> applications = [
     {
@@ -25,29 +25,66 @@ class ApplicationsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.blueGrey[100],
         title: Text('My Applications'),
       ),
       body: ListView.builder(
         itemCount: applications.length,
         itemBuilder: (context, index) {
           final application = applications[index];
-          return Card(
-            child: ListTile(
-              leading: Icon(Icons.description),
-              title: Text(application['title']!),
-              subtitle: Text('${application['company']} - Status: ${application['status']}'),
-              trailing: Icon(
-                application['status'] == 'Accepted' ? Icons.check_circle : Icons.info,
-                color: application['status'] == 'Accepted' ? Colors.green : Colors.grey,
-              ),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ApplicationDetailsPage(application: application),
+         return Card(
+            color: Colors.blueGrey,
+            margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+            child: Opacity(
+              opacity: application['status'] == 'Rejected' ? 0.5 : 1.0, // Dim rejected ones
+              child: ListTile(
+                leading: Icon(Icons.description),
+                title: Text(
+                  application['title']!,
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: application['status'] == 'Rejected' ? Colors.red[200] : Colors.white,
                   ),
-                );
-              },
+                ),
+                subtitle: Text(
+                  '${application['company']} - Status: ${application['status']}',
+                  style: TextStyle(color: Colors.white70, fontSize: 17),
+                ),
+                trailing: Icon(
+                  application['status'] == 'Accepted'
+                      ? Icons.check_circle
+                      : application['status'] == 'Rejected'
+                      ? Icons.cancel
+                      : application['status'] == 'Canceled'
+                      ? Icons.block
+                      : Icons.info,
+                  color: application['status'] == 'Accepted'
+                      ? Colors.lightGreen
+                      : application['status'] == 'Rejected'
+                      ? Colors.red[600]
+                      : application['status'] == 'Canceled'
+                      ? Colors.orange
+                      : Colors.grey[300],
+                ),
+                onTap: application['status'] == 'Rejected' ? null : () {
+                  Navigator.of(context).push(
+                    PageRouteBuilder(
+                      transitionDuration: Duration(milliseconds: 300),
+                      pageBuilder: (_, __, ___) => ApplicationDetailsPage(application: application),
+                      transitionsBuilder: (_, animation, __, child) {
+                        return SlideTransition(
+                          position: Tween<Offset>(
+                            begin: Offset(1, 0), // Start from right
+                            end: Offset.zero,
+                          ).animate(animation),
+                          child: child,
+                        );
+                      },
+                    ),
+                  );
+                },
+              ),
             ),
           );
         },
@@ -56,45 +93,5 @@ class ApplicationsPage extends StatelessWidget {
   }
 }
 
-class ApplicationDetailsPage extends StatelessWidget {
-  final Map<String, String> application;
 
-  ApplicationDetailsPage({required this.application});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(application['title']!),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              application['title']!,
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 10),
-            Text(
-              'Company: ${application['company']}',
-              style: TextStyle(fontSize: 18),
-            ),
-            SizedBox(height: 10),
-            Text(
-              'Status: ${application['status']}',
-              style: TextStyle(fontSize: 18),
-            ),
-            SizedBox(height: 20),
-            Text(
-              'Details about the application can be shown here.',
-              style: TextStyle(fontSize: 16),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
 

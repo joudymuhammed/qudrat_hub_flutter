@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:qudrat_hub/Screens/Employee/AccountPage.dart';
 import 'package:qudrat_hub/Screens/Employee/HomePage/HomePage.dart';
 import 'package:qudrat_hub/Screens/Employee/JobListingPage.dart';
+import 'package:qudrat_hub/Screens/Employee/LoginPage.dart';
 import 'package:qudrat_hub/Screens/Employee/MyApplicationsPage.dart';
 
 import 'Component/BottomNavItem.dart';
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: CustomBottomNavBar(),
+      home: Signin(),
       debugShowCheckedModeBanner: false,
     );
   }
@@ -58,7 +59,7 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
               height: 80,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [Color(0xFF616161), Color(0xFF00796B)],
+                  colors: [ Colors.blueGrey, Colors.black],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
@@ -70,8 +71,8 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     BottomNavItem(
-                      icon: Icons.work,
-                      label: 'Job Listing',
+                      icon: Icons.notifications_on,
+                      label: 'Notifications',
                       isSelected: _selectedIndex == 0,
                       onTap: () => _onItemTapped(0),
                     ),
@@ -83,7 +84,7 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
                     ),
                     SizedBox(width: 60),
                     BottomNavItem(
-                      icon: Icons.shopping_cart,
+                      icon: Icons.chat,
                       label: 'Chats',
                       isSelected: _selectedIndex == 3,
                       onTap: () => _onItemTapped(3),

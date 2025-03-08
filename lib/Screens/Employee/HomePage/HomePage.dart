@@ -1,47 +1,50 @@
 import 'package:flutter/material.dart';
+import 'package:qudrat_hub/Screens/Employee/HomePage/AdvicePage.dart';
+import 'package:qudrat_hub/Screens/Employee/HomePage/EventDetailsPage.dart';
 import 'package:qudrat_hub/Screens/Employee/HomePage/EventsSection.dart';
 import 'package:qudrat_hub/Screens/Employee/JobListingPage.dart';
 import '../../../Component/JobCard.dart';
 import '../../../Component/JobLists.dart';
-import '../JobDetails.dart';
+import 'JobDetails.dart';
 
 class HomePage extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: Colors.teal[600],
-      title: Center(child: Text("Welcome to the Job Portal", style: TextStyle(color: Colors.white),)),),
-      body: CustomScrollView(
-        slivers: [
-          SliverList(
-            delegate: SliverChildListDelegate(
-              [
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      HeaderSection(),
-                      SectionDivider(),
-                      UpcomingEventsSection(),
-                      SectionDivider(),
-                      NewJobPostingsSection(),
-                      SectionDivider(),
-                      FeaturedCompaniesSection(),
-                      SectionDivider(),
-                      CareerTipsSection(),
-                      SectionDivider(),
-                      TrendingCategoriesSection(),
-                      SectionDivider(),
-                      RecentlyViewedJobsSection(),
-                    ],
+      appBar: AppBar(backgroundColor: Colors.blueGrey[100],
+        title: Text("Welcome to the Job Portal", style: TextStyle(color: Colors.black)), centerTitle: true,),
+      body: Container(
+        child: CustomScrollView(
+          slivers: [
+            SliverList(
+              delegate: SliverChildListDelegate(
+                [
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        HeaderSection(),
+                        SectionDivider(),
+                        UpcomingEventsSection(),
+                        SectionDivider(),
+                        NewJobPostingsSection(),
+                        SectionDivider(),
+                        FeaturedCompaniesSection(),
+                        SectionDivider(),
+                        CareerTipsSection(),
+                        SectionDivider(),
+                        TrendingCategoriesSection(),
+                        SectionDivider(),
+                        RecentlyViewedJobsSection(),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -66,7 +69,7 @@ class SectionDivider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 16.0),
+      padding: const EdgeInsets.only(top: 8.0, bottom: 16.0),
       child: Divider(color: Colors.grey[400]),
     );
   }
@@ -95,11 +98,11 @@ class SectionWrapper extends StatelessWidget {
 // **Upcoming Events Section (Horizontal Scrolling)**
 class UpcomingEventsSection extends StatelessWidget {
   final List<Map<String, String>> events = const [
-    {'title': 'Tech Job Fair 2024', 'date': 'March 15', 'location': 'Amsterdam'},
+    {'title': 'Tech Job Fair 2024', 'date': 'March 15', 'location': '6th of October'},
     {'title': 'Resume Workshop', 'date': 'March 20', 'location': 'Online'},
-    {'title': 'AI Conference', 'date': 'April 10', 'location': 'Berlin'},
-    {'title': 'Startup Networking', 'date': 'April 25', 'location': 'San Francisco'},
-    {'title': 'Freelancer Meetup', 'date': 'May 5', 'location': 'London'},
+    {'title': 'AI Conference', 'date': 'April 10', 'location': 'Nile University'},
+    {'title': 'Startup Networking', 'date': 'April 25', 'location': 'Nasr city'},
+    {'title': 'Freelancer Meetup', 'date': 'May 5', 'location': 'the 5th settlement'},
   ];
 
   @override
@@ -111,7 +114,7 @@ class UpcomingEventsSection extends StatelessWidget {
       child: Column(
         children: [
           SizedBox(
-            height: 100, // Adjust height for event cards
+            height: 100,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: topEvents.length + 1, // Extra for "See All" button
@@ -140,6 +143,7 @@ class UpcomingEventsSection extends StatelessWidget {
     );
   }
 }
+
 class SeeAllButton extends StatelessWidget {
   final String label;
   final VoidCallback onTap;
@@ -155,7 +159,7 @@ class SeeAllButton extends StatelessWidget {
         height: 120,
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          color: Colors.teal[700],
+          color: Colors.blueGrey[800],
           borderRadius: BorderRadius.circular(10),
         ),
         child: Text(
@@ -176,22 +180,30 @@ class EventCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 200,
-      margin: EdgeInsets.only(right: 10),
-      child: Card(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-        elevation: 5,
-        child: Padding(
-          padding: const EdgeInsets.all(10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(event['title']!, style: TextStyle(fontWeight: FontWeight.bold)),
-              SizedBox(height: 5),
-              Text('${event['date']} - ${event['location']}', style: TextStyle(color: Colors.grey[700])),
-            ],
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => EventDetailsPage(event: event)),
+        );
+      },
+      child: Container(
+        width: 200,
+        margin: EdgeInsets.only(right: 10),
+        child: Card(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+          elevation: 5,
+          child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(event['title']!, style: TextStyle(fontWeight: FontWeight.bold)),
+                SizedBox(height: 5),
+                Text('${event['date']} - ${event['location']}', style: TextStyle(color: Colors.grey[700])),
+              ],
+            ),
           ),
         ),
       ),
@@ -206,7 +218,7 @@ class NewJobPostingsSection extends StatelessWidget {
     List<Map<String, String>> topJobs = jobListings.take(4).toList(); // First 4 jobs
 
     return SectionWrapper(
-      title: 'New Job Postings',
+      title: 'New Job Postings 🧑🏻‍💻',
       child: Column(
         children: [
           GridView.builder(
@@ -266,14 +278,31 @@ class FeaturedCompaniesSection extends StatelessWidget {
 
 // **Career Tips Section**
 class CareerTipsSection extends StatelessWidget {
-  final List<String> tips = const ['How to Write a CV', 'Interview Tips', 'Job Search Strategies'];
+  final List<Map<String, dynamic>> tips = const [
+    {'title': 'How to Write a CV', 'icon': Icons.description, 'color': Colors.blue},
+    {'title': 'Interview Tips', 'icon': Icons.record_voice_over, 'color': Colors.green},
+    {'title': 'Job Search Strategies', 'icon': Icons.search, 'color': Colors.orange},
+  ];
 
   @override
   Widget build(BuildContext context) {
     return SectionWrapper(
       title: 'Career Advice',
       child: Column(
-        children: tips.map((tip) => ListTile(title: Text(tip))).toList(),
+        children: tips.map((tip) => Column(
+          children: [
+            ListTile(
+              leading: Icon(tip['icon'], color: tip['color']),
+              title: Text(tip['title'], style: TextStyle(fontWeight: FontWeight.w500)),
+              trailing: Icon(Icons.arrow_forward_ios, size: 16, color: Colors.grey),
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => CareerAdvicePage(title: tip['title'])),
+              ),
+            ),
+            if (tip != tips.last) Divider(), // Divider between items except last one
+          ],
+        )).toList(),
       ),
     );
   }

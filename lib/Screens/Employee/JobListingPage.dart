@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:qudrat_hub/Screens/Employee/HomePage/JobDetails.dart';
 
 import '../../Component/JobCard.dart';
 import '../../Component/JobLists.dart';
-import 'JobDetails.dart';
 
 
 
@@ -11,8 +11,8 @@ class JobListingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Job Listings'),
-        backgroundColor: Colors.blueAccent,
+        title: Text('Notifications',style: TextStyle(color: Colors.black),),
+        backgroundColor: Colors.blueGrey[100],
       ),
       body: ListView.builder(
         itemCount: jobListings.length,

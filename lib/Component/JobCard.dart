@@ -20,7 +20,7 @@ class JobCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(Icons.work, color: Colors.blue, size: 24),
+              Icon(Icons.work, color: Colors.grey[800], size: 24),
               const SizedBox(height: 5),
               Text(
                 job['title']!,

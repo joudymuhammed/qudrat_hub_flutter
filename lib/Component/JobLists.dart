@@ -4,37 +4,37 @@ final List<Map<String, String>> jobListings = [
   {
     'title': 'Software Engineer',
     'company': 'XYZ Company',
-    'location': 'Amsterdam',
+    'location': 'Heliopolis',
     'description': 'Develop and maintain software applications.'
   },
   {
     'title': 'Graphic Designer',
     'company': 'ABC Agency',
-    'location': 'Rotterdam',
+    'location': 'Sheikh Zayed',
     'description': 'Create visual concepts and designs for clients.'
   },
   {
     'title': 'Product Manager',
     'company': 'Tech Solutions',
-    'location': 'Utrecht',
+    'location': 'October',
     'description': 'Oversee product development and marketing strategies.'
   },
   {
     'title': 'Product Manager',
     'company': 'Tech Solutions',
-    'location': 'Utrecht',
+    'location': 'Dokki',
     'description': 'Oversee product development and marketing strategies.'
   },
   {
     'title': 'Product Manager',
     'company': 'Tech Solutions',
-    'location': 'Utrecht',
+    'location': 'Dokki',
     'description': 'Oversee product development and marketing strategies.'
   },
   {
     'title': 'Product Manager',
     'company': 'Tech Solutions',
-    'location': 'Utrecht',
+    'location': 'the 5th settlement',
     'description': 'Oversee product development and marketing strategies.'
   },
 ];

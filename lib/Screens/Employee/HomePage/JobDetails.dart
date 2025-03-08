@@ -10,7 +10,7 @@ class JobDetailsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(job['title']!),
-        backgroundColor: Colors.blueAccent,
+        backgroundColor: Colors.blueGrey[100],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
