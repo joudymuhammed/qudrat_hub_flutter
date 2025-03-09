@@ -25,8 +25,8 @@ class ApplicationsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blueGrey[100],
-        title: Text('My Applications'),
+        backgroundColor: Colors.blueGrey[800],
+        title: Text('My Applications',style: TextStyle(color: Colors.white),),
       ),
       body: ListView.builder(
         itemCount: applications.length,

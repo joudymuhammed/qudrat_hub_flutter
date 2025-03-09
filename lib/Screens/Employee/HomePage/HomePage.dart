@@ -11,9 +11,24 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: Colors.blueGrey[100],
-        title: Text("Welcome to the Job Portal", style: TextStyle(color: Colors.black)), centerTitle: true,),
+      appBar: AppBar(
+        backgroundColor: Colors.blueGrey[800],
+        title: Text(
+          "Welcome to the Job Portal",
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.search, color: Colors.black),
+            onPressed: () {
+              // Add search functionality
+            },
+          ),
+        ],
+      ),
       body: Container(
+        color: Colors.blueGrey[50], // Light background for better contrast
         child: CustomScrollView(
           slivers: [
             SliverList(
@@ -57,8 +72,15 @@ class HeaderSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: const [
-        Text('Hello, User!', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-        Text('Find your dream job today!', style: TextStyle(fontSize: 16, color: Colors.grey)),
+        Text(
+          'Hello, User!',
+          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        ),
+        SizedBox(height: 4),
+        Text(
+          'Find your dream job today!',
+          style: TextStyle(fontSize: 16, color: Colors.grey),
+        ),
       ],
     );
   }
@@ -69,8 +91,8 @@ class SectionDivider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 8.0, bottom: 16.0),
-      child: Divider(color: Colors.grey[400]),
+      padding: const EdgeInsets.symmetric(vertical: 16.0),
+      child: Divider(color: Colors.grey[400], thickness: 1),
     );
   }
 }
@@ -87,7 +109,10 @@ class SectionWrapper extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(title, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+        Text(
+          title,
+          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        ),
         const SizedBox(height: 10),
         child,
       ],
@@ -110,11 +135,11 @@ class UpcomingEventsSection extends StatelessWidget {
     List<Map<String, String>> topEvents = events.length > 4 ? events.sublist(0, 4) : events;
 
     return SectionWrapper(
-      title: 'Upcoming Events📅🌟🎊',
+      title: 'Upcoming Events 📅🌟🎊',
       child: Column(
         children: [
           SizedBox(
-            height: 100,
+            height: 120,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: topEvents.length + 1, // Extra for "See All" button
@@ -144,35 +169,6 @@ class UpcomingEventsSection extends StatelessWidget {
   }
 }
 
-class SeeAllButton extends StatelessWidget {
-  final String label;
-  final VoidCallback onTap;
-
-  SeeAllButton({required this.label, required this.onTap});
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        width: 100,
-        height: 120,
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          color: Colors.blueGrey[800],
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Text(
-          label,
-          textAlign: TextAlign.center,
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-        ),
-      ),
-    );
-  }
-}
-
-
 // **Event Card**
 class EventCard extends StatelessWidget {
   final Map<String, String> event;
@@ -199,12 +195,47 @@ class EventCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(event['title']!, style: TextStyle(fontWeight: FontWeight.bold)),
+                Text(
+                  event['title']!,
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                ),
                 SizedBox(height: 5),
-                Text('${event['date']} - ${event['location']}', style: TextStyle(color: Colors.grey[700])),
+                Text(
+                  '${event['date']} - ${event['location']}',
+                  style: TextStyle(color: Colors.grey[700], fontSize: 14),
+                ),
               ],
             ),
           ),
+        ),
+      ),
+    );
+  }
+}
+
+// **See All Button**
+class SeeAllButton extends StatelessWidget {
+  final String label;
+  final VoidCallback onTap;
+
+  SeeAllButton({required this.label, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: 100,
+        height: 120,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          color: Colors.blueGrey[800],
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Text(
+          label,
+          textAlign: TextAlign.center,
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
       ),
     );
@@ -259,7 +290,6 @@ class NewJobPostingsSection extends StatelessWidget {
   }
 }
 
-
 // **Featured Companies Section**
 class FeaturedCompaniesSection extends StatelessWidget {
   final List<String> companies = const ['Google', 'Microsoft', 'Amazon', 'Tesla'];
@@ -270,7 +300,10 @@ class FeaturedCompaniesSection extends StatelessWidget {
       title: 'Featured Companies',
       child: Wrap(
         spacing: 10,
-        children: companies.map((company) => Chip(label: Text(company))).toList(),
+        children: companies.map((company) => Chip(
+          label: Text(company),
+          backgroundColor: Colors.blueGrey[100],
+        )).toList(),
       ),
     );
   }
@@ -322,7 +355,10 @@ class TrendingCategoriesSection extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           children: categories.map((category) => Padding(
             padding: const EdgeInsets.symmetric(horizontal: 5),
-            child: Chip(label: Text(category)),
+            child: Chip(
+              label: Text(category),
+              backgroundColor: Colors.blueGrey[100],
+            ),
           )).toList(),
         ),
       ),
@@ -345,8 +381,8 @@ class RecentlyViewedJobsSection extends StatelessWidget {
       child: Column(
         children: recentJobs.map((job) => Card(
           child: ListTile(
-            leading: Icon(Icons.history),
-            title: Text(job['title']!),
+            leading: Icon(Icons.history, color: Colors.blueGrey[800]),
+            title: Text(job['title']!, style: TextStyle(fontWeight: FontWeight.w500)),
             subtitle: Text(job['company']!),
           ),
         )).toList(),

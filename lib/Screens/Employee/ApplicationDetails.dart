@@ -12,7 +12,7 @@ class ApplicationDetailsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(application['title']!),
-        backgroundColor: Colors.blueGrey[100],
+        backgroundColor: Colors.blueGrey,
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {

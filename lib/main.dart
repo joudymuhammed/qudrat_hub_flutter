@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:qudrat_hub/Screens/Employee/AccountPage.dart';
 import 'package:qudrat_hub/Screens/Employee/HomePage/HomePage.dart';
-import 'package:qudrat_hub/Screens/Employee/JobListingPage.dart';
 import 'package:qudrat_hub/Screens/Employee/LoginPage.dart';
 import 'package:qudrat_hub/Screens/Employee/MyApplicationsPage.dart';
+import 'package:qudrat_hub/Screens/Employee/NotificationsPage.dart';
 
 import 'Component/BottomNavItem.dart';
 import 'Screens/Employee/ChatsPage.dart';
@@ -34,7 +34,7 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
   int _selectedIndex = 2;
 
   final List<Widget> _pages = [
-    JobListingPage(),
+    NotificationsPage(),
     ApplicationsPage(),
     HomePage(),
     ChatsPage(),
@@ -59,7 +59,7 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
               height: 80,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [ Colors.blueGrey, Colors.black],
+                  colors: [ Colors.blueGrey, Colors.black, Colors.teal],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),

@@ -8,23 +8,70 @@ class EventDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(event['title']!)),
-      body: Padding(
+      appBar: AppBar(
+        title: Text(event['title']!),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.share),
+            onPressed: () {
+              // Share event functionality
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('Event shared!')),
+              );
+            },
+          ),
+        ],
+      ),
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(event['title']!, style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+            // Event Banner
+            ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Image.asset(
+                event['banner'] ?? 'assets/default_event_banner.jpg',
+                height: 200,
+                width: double.infinity,
+                fit: BoxFit.cover,
+              ),
+            ),
+            SizedBox(height: 20),
+
+            // Event Title and Details
+            Text(
+              event['title']!,
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
             SizedBox(height: 8),
-            Text("📅 ${event['date']} - 📍 ${event['location']}", style: TextStyle(color: Colors.grey[700])),
+            Text(
+              "📅 ${event['date']} - 📍 ${event['location']}",
+              style: TextStyle(color: Colors.grey[700], fontSize: 16),
+            ),
             SizedBox(height: 16),
-            Text("Organized by: ${event['organizer'] ?? 'Unknown'}", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+
+            // Organizer and Collaborator
+            Text(
+              "Organized by: ${event['organizer'] ?? 'Unknown'}",
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
             SizedBox(height: 8),
             if (event['collaborator'] != null)
-              Text("In collaboration with: ${event['collaborator']}", style: TextStyle(fontSize: 16, color: Colors.grey[600])),
+              Text(
+                "In collaboration with: ${event['collaborator']}",
+                style: TextStyle(fontSize: 16, color: Colors.grey[600]),
+              ),
             SizedBox(height: 16),
-            Text(event['description'] ?? "No description available."),
+
+            // Event Description
+            Text(
+              event['description'] ?? "No description available.",
+              style: TextStyle(fontSize: 16, height: 1.5),
+            ),
             SizedBox(height: 20),
+
+            // Registration Form
             RegistrationForm(),
           ],
         ),
@@ -33,7 +80,7 @@ class EventDetailsPage extends StatelessWidget {
   }
 }
 
-// **Step 2: Registration Form Widget**
+// Registration Form Widget
 class RegistrationForm extends StatefulWidget {
   @override
   _RegistrationFormState createState() => _RegistrationFormState();
@@ -47,7 +94,9 @@ class _RegistrationFormState extends State<RegistrationForm> {
   void submitForm() {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Registered successfully!")));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Registered successfully!")),
+      );
     }
   }
 
@@ -70,7 +119,11 @@ class _RegistrationFormState extends State<RegistrationForm> {
           SizedBox(height: 20),
           ElevatedButton(
             onPressed: submitForm,
-            child: Text("Register"),
+            child: Text("Register",style: TextStyle(color: Colors.white),),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.blueGrey,
+              padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+            ),
           ),
         ],
       ),
